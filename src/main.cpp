@@ -6,7 +6,8 @@
 // Dimensions
 const GLint WIDTH = 800, HEIGHT = 600;
 
-int main() {
+int main()
+{
 
     // Init gl
     if (!glfwInit())
@@ -36,14 +37,14 @@ int main() {
     int bufferWidth, bufferHeight;
     glfwGetFramebufferSize(mainWindow, &bufferWidth, &bufferHeight);
 
-
     // Set context for GLFW to use
     glfwMakeContextCurrent(mainWindow);
 
     // Allow modern extensions
     glewExperimental = GL_TRUE;
 
-    if (!glewInit()) {
+    if (glewInit() != GLEW_OK)
+    {
         printf("GLEW initialization failed.");
         glfwDestroyWindow(mainWindow);
         glfwTerminate();
@@ -59,9 +60,10 @@ int main() {
         glfwPollEvents();
 
         glClearColor(1.0, 0.8, 0.2, 1.0);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        glfwSwapBuffers(mainWindow);
     }
-
-
 
     return 0;
 }
